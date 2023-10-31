@@ -4,5 +4,5 @@
 
 
 @section('content')
-    <h1>Welcome Page</h1>
+    <h1>Comicssssss</h1>
 @endsection

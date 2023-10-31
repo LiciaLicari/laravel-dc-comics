@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Comic;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ComicController extends Controller
@@ -12,7 +13,12 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        return view('welcome');
+    }
+
+    public function comics()
+    {
+        return view('comics');
     }
 
     /**
@@ -20,7 +26,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.comics.create');
     }
 
     /**
