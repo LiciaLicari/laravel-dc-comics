@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ComicController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guests\PageController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
