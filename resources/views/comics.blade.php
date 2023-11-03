@@ -19,8 +19,9 @@
                                 <img class="my_card img-fluid" src="{{ asset('storage/' . $comic->thumb) }}" alt="">
                             @endif
                         </div>
-                        <div class="card-body bg-dark">
-                            <h4>{{ $comic['title'] }}</h4>
+                        <div class="card-body bg-warning rounded-bottom-4">
+                            <h4>{{ $comic->title }}</h4>
+                            <h5 class="text-danger">{{ $comic->price }}</h5>
                         </div>
                     </div>
                 </div>

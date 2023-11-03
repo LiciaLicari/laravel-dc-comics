@@ -14,8 +14,8 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $comics = Comic::all();
-
+        $comics = Comic::orderByDesc('id')->get();
+        //dd($comics);
         return view('admin.comics.index', compact('comics'));
     }
 
@@ -32,15 +32,24 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
+
         $comic = new Comic();
 
-        //dd($request->all());
         $data = $request->all();
 
         if ($request->has('thumb')) {
             $thumb_path = Storage::put('thumb', $request->thumb);
+            //dd($thumb_path);
             $data['thumb'] = $thumb_path;
         }
+
+        /* $comic->title = $request->title;
+        $comic->price = $request->price;
+        $comic->description = $request->description;
+        $comic->thumb = $request->thumb;
+        $comic->save(); */
+
+        /* return view('admin.comics.index'); */
 
         $comic->create($data);
 
@@ -52,8 +61,15 @@ class ComicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comic $comic)
+    public function show(Comic $comic, Request $request)
     {
+
+        if ($request->has('thumb')) {
+            $thumb_path = Storage::put('thumb', $request->thumb);
+            //dd($thumb_path);
+            $data['thumb'] = $thumb_path;
+        }
+
         return view('admin.comics.show', compact('comic'));
     }
 
@@ -62,7 +78,7 @@ class ComicController extends Controller
      */
     public function edit(Comic $comic)
     {
-        //
+        return view('admin.comics.edit', compact('comic'));
     }
 
     /**
@@ -70,8 +86,23 @@ class ComicController extends Controller
      */
     public function update(Request $request, Comic $comic)
     {
-        //
+        //dd($request->all());
+        $data = $request->all();
+
+        if ($request->has('thumb') && $comic->thumb) {
+
+            Storage::delete($comic->thumb);
+
+            $newThumb = $request->thumb;
+            $path = Storage::put('thumb', $newThumb);
+            $data['thumb'] = $path;
+        }
+
+        $comic->update($data);
+
+        return to_route('comics.index')->with('message', 'Congrats! Your update is successfully 👍');
     }
+
 
     /**
      * Remove the specified resource from storage.
