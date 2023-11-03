@@ -78,6 +78,13 @@ class ComicController extends Controller
      */
     public function destroy(Comic $comic)
     {
-        //
+        if (!is_null($comic->thumb)) {
+            Storage::delete($comic->thumb);
+        }
+
+        $comic->delete();
+
+        //POST REDIRECT GET
+        return to_route('comics.index')->with('message', 'Well done! Comic deleted successfully 👍');
     }
 }
