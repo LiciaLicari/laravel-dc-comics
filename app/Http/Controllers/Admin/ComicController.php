@@ -44,7 +44,9 @@ class ComicController extends Controller
 
         $comic->create($data);
 
-        return to_route('admin.comics.index');
+        $comics = Comic::all();
+
+        return to_route('comics.index', compact('comics'));
     }
 
     /**
